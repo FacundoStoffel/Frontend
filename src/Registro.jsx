@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export class InternalLogin extends Component {
+export class InternalRegistro extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
+            nombre: '',
+            apellido: '',
             mail: '',
             contrasena: ''
         }
@@ -17,19 +19,21 @@ export class InternalLogin extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
 
-        let login = {
+        let registro = {
+            nombre: this.state.nombre,
+            apellido: this.state.apellido,
             mail: this.state.mail,
             contrasena: this.state.contrasena
         }
 
         let parametros = {
             method: 'POST',
-            body: JSON.stringify(login),
+            body: JSON.stringify(registro),
             headers: {
                 'Content-Type': 'application/json',
             }
         }
-        fetch('http://localhost:8080/security/login', parametros)
+        fetch('http://localhost:8080/user/register', parametros)
             .then(res => {
                 return res.json()
                     .then(body => {
@@ -44,9 +48,7 @@ export class InternalLogin extends Component {
             .then(
                 result => {
                     if (result.ok) {
-                        sessionStorage.setItem('token', result.body.token)
-
-                        toast.success('Bienvenido', {
+                        toast.success('Usuario creado', {
                             position: "top-center",
                             autoClose: 5000,
                             hideProgressBar: false,
@@ -56,7 +58,7 @@ export class InternalLogin extends Component {
                             progress: undefined,
                             theme: "light",
                         });
-                        this.props.navigate("/")
+                         this.props.navigate("/")
                     } else {
                         toast.error(result.body.message, {
                             position: "top-center",
@@ -93,28 +95,54 @@ export class InternalLogin extends Component {
         this.setState({ contrasena: event.target.value });
     }
 
+    handleChangeNombre = (event) => {
+        this.setState({ nombre: event.target.value });
+    }
+
+    handleChangeApellido = (event) => {
+        this.setState({ apellido: event.target.value });
+    }
+
     render() {
         return (
             <>
-                <h1>Iniciar Sesión</h1>
+                <h1>Registrarse</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div class="login">
+                    <div class="register">
+                    <div className="form-floating mb-3">
+                            <input type="text" 
+                            className="form-control" 
+                            id="nombre" 
+                            placeholder="name@example.com"
+                            onChange={this.handleChangeNombre}
+                            name="nombre" />
+                            <label for="nombre">Ingrese su nombre</label>
+                        </div>
                         <div className="form-floating mb-3">
-                            <input type="email"
-                                className="form-control"
-                                id="mail"
-                                placeholder="name@example.com"
-                                onChange={this.handleChangeMail}
-                                name="mail" />
+                            <input type="text" 
+                            className="form-control" 
+                            id="apellido" 
+                            placeholder="name@example.com"
+                            onChange={this.handleChangeApellido}
+                            name="apellido" />
+                            <label for="apellido">Ingrese su apellido</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="email" 
+                            className="form-control" 
+                            id="mail" 
+                            placeholder="name@example.com"
+                            onChange={this.handleChangeMail}
+                            name="mail" />
                             <label for="correo">Correo Electrónico</label>
                         </div>
                         <div className="form-floating">
-                            <input type="password"
-                                className="form-control"
-                                id="contrasena"
-                                placeholder="Password"
-                                onChange={this.handleChangeContrasena}
-                                name="contrasena" />
+                            <input type="password" 
+                            className="form-control" 
+                            id="contrasena" 
+                            placeholder="Password"
+                            onChange={this.handleChangeContrasena}
+                            name="contrasena" />
                             <label for="contrasena">Contraseña</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
@@ -126,49 +154,15 @@ export class InternalLogin extends Component {
     }
 }
 
-export default Login
+export default Registro
 
 
-export function Login() {
+export function Registro() {
     const navigate = useNavigate();
     const p = useParams();
     return (
         <>
-            <InternalLogin navigate={navigate} params={p} />
+            <InternalRegistro navigate={navigate} params={p} />
         </>
     );
 }
-
-
-
-
-
-
-
-
-
-// import React, { Component } from 'react'
-// import './styles/Login.css';
-
-// export class Login extends Component {
-//     render() {
-//         return (
-//             <>
-//             <div class="login">
-//             <h1>Iniciar Sesión</h1>
-//                 <div className="form-floating mb-3">
-//                     <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-//                     <label for="floatingInput">Correo Electrónico</label>
-//                 </div>
-//                 <div className="form-floating">
-//                     <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-//                     <label for="floatingPassword">Contraseña</label>
-//                 </div>
-//                 <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-//                 </div>
-//             </>
-//         )
-//     }
-// }
-
-// export default Login

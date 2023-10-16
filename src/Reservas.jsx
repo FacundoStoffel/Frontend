@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import jwt_decode from "jwt-decode";
 
 export class Reservas extends Component {
 
@@ -6,25 +10,71 @@ export class Reservas extends Component {
     super(props)
 
     this.state = {
-      reservas: []
+      reservas: [],
+      modal: false
     }
   };
 
   componentDidMount() {
-    fetch("http://localhost:8080/reservas")
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          reservas: result
-        });
-      },
-        error => {
 
+    let parametros = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      }
+    }
+
+    fetch("http://localhost:8080/reservas", parametros)
+
+      .then(res => {
+        return res.json()
+          .then(body => {
+            return {
+              status: res.status,
+              ok: res.ok,
+              headers: res.headers,
+              body: body
+            };
+          })
+      }).then(
+
+        result => {
+          if (result.ok) {
+            this.setState({
+              reservas: result.body,
+              modal: false
+            });
+          } else {
+            toast.error(result.body.message, {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
         }
-      )
+      ).catch(
+        (error) => { console.log(error) }
+      );
+    // .then(res => res.json())
+    // .then(result => {
+    //   this.setState({
+    //     reservas: result
+    //   });
+    // },
+    //   error => {
+    //     console.log(error)
+    //   }
+    // )
   };
 
   render() {
+
     const reservas_list = this.state.reservas.map((reserva, index) => {
       return (
         <tr key={index}>
@@ -57,7 +107,7 @@ export class Reservas extends Component {
             {reservas_list}
           </tbody>
         </table>
-
+        <Link to={"/reservas/edit"} className='btn btn-primary'>Nueva Reserva</Link>
       </>
     )
   }
