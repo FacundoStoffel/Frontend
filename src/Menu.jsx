@@ -1,17 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles/index.css';
-import React, { Component } from 'react';
 import jwt_decode from "jwt-decode";
 
-export class Menu extends Component {
+function Menu()  {
 
-  logout = () => {
+  const navigate = useNavigate();
+
+  function logout()  {
     sessionStorage.removeItem('token');
-
+navigate("/");
     // navigate("/");
   }
 
-  render() {
+
 
     const token = sessionStorage.getItem('token');
 
@@ -39,11 +40,14 @@ export class Menu extends Component {
                   <li className="nav-item">
                     <Link to="/reservas" className="nav-link active letra">Reservas</Link>
                   </li>
+                  <li className="nav-item">
+                    <Link to="/horario" className="nav-link active letra">Horarios</Link>
+                  </li>
                 </ul>
               </div>
               {decoded.mail}
 
-              <button type="button" className='btn btn-danger' onClick={this.logout}>
+              <button type="button" className='btn btn-danger' onClick={() => logout()}>
                 <span className="material-symbols-outlined">
                   logout
                 </span>
@@ -92,6 +96,6 @@ export class Menu extends Component {
     }
 
   }
-}
+
 
 export default Menu

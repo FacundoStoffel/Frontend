@@ -1,7 +1,7 @@
 export default function Inicio(){
     return(
         <>
-            <h1 className="App-header">Que miras vos</h1>
+            <h1 className="App-header">El inicio *inserte musica epica*</h1>
         </>
     );
 };

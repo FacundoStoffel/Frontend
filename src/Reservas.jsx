@@ -61,29 +61,38 @@ export class Reservas extends Component {
       ).catch(
         (error) => { console.log(error) }
       );
-    // .then(res => res.json())
-    // .then(result => {
-    //   this.setState({
-    //     reservas: result
-    //   });
-    // },
-    //   error => {
-    //     console.log(error)
-    //   }
-    // )
   };
+
+
+  convertirFecha = (date) => {
+    const fecha = new Date(date);
+    const dia = fecha.getUTCDate().toString().padStart(2, '0');
+    const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, '0');
+    const anio = fecha.getUTCFullYear();
+    return `${dia}/${mes}/${anio}`;
+  }
+
+
 
   render() {
 
     const reservas_list = this.state.reservas.map((reserva, index) => {
+
       return (
         <tr key={index}>
-          <td>{reserva.fecha}</td>
+          <td>{this.convertirFecha(reserva.fecha)}</td>
           <td>{reserva.hora}</td>
           <td>{reserva.id_usuario}</td>
           <td>{reserva.id_corte}</td>
           <td>{reserva.id_pago}</td>
           <td>{reserva.cancelada}</td>
+          <td>
+            <Link to={`/reservas/edit/${reserva.id_reserva}`} className='btn btn-primary'>
+              <span class="material-symbols-outlined">
+                edit
+              </span>
+            </Link>
+          </td>
         </tr>
       )
     });
