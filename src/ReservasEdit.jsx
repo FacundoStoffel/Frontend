@@ -20,7 +20,7 @@ export class InternalReservasEdit extends Component {
             id_corte: null,
             metodo_pago: [],
             id_pago: null,
-            cancelada: null
+            // cancelada: null
         }
     }
 
@@ -150,83 +150,64 @@ export class InternalReservasEdit extends Component {
             }
         }
         fetch('http://localhost:8080/reservas/create', parametros)
-            .then(res => {
-                try {
-                    res.json().then(
-                        body => {
-                            return {
-                                status: res.status,
-                                ok: res.ok,
-                                headers: res.headers,
-                                body: body
-                            };
-                        }
-                    )
-                } catch (error) {
-                    console.log(error);
-                }
-            })
-                   .then(
-                (result) => {debugger
-                    if (result.ok) {
-                        toast.success(result.body.message, {
-                            position: "top-center",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                            });
-                    } else {
-                        toast.error(result.body.message, {
-                            position: "top-center",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                            });
-                    }
+        .then(res => {debugger
+            return res.json()
+                .then(body => {
+                    return {
+                        status: res.status,
+                        ok: res.ok,
+                        headers: res.headers,
+                        body: body
+                    };
                 })
-            .catch((error) => {
-                console.log(error)
-            });
-        this.props.navigate("/reservas")
+        }).then(
+            result => {
+                if (result.ok) {
+                    toast.success(result.body.message, this.configTosti);
+                    this.props.navigate("/reservas")
+                } else {
+                    toast.error(result.body.message, this.configTosti);
+                }
+            }
+        ).catch(
+            (error) => { console.log(error) }
+        );
     }
 
+
+    handleChangeFecha = (fechaSeleccionada) => {
+
+        this.setState({ fecha: fechaSeleccionada });
+    }
 
     handleChangeHora = (selectedOption) => {
         if (selectedOption !== null) {
             this.setState({ hora: selectedOption.value });
         } else {
+            this.setState({ hora: null });
             console.log("No se ha seleccionado una hora.");
         }
     }
 
     handleChangeCorte = (selectedOption) => {
         if (selectedOption !== null) {
-            this.setState({ corte: selectedOption.value });
+            this.setState({ id_corte: selectedOption.value });
         } else {
+            this.setState({ id_corte: null });
             console.log("No se ha seleccionado un corte.");
         }
     }
 
     handleChangePago = (selectedOption) => {
         if (selectedOption !== null) {
-            this.setState({ pago: selectedOption.value });
+            this.setState({ id_pago: selectedOption.value });
         } else {
+            this.setState({ id_pago: null });
             console.log("No se ha seleccionado un metodo de pago.");
         }
     }
 
-    handleChangeFecha = (fechaSeleccionada) => {
 
-        this.setState({ fecha: fechaSeleccionada });
-    }
 
 
 
