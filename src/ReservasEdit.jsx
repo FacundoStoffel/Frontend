@@ -136,7 +136,7 @@ export class InternalReservasEdit extends Component {
         let reserva = {
             fecha: this.state.fecha,
             hora: this.state.hora,
-            id_usuario: this.state.id_usuario,
+            id_usuario: 2,
             id_corte: this.state.id_corte,
             id_pago: this.state.id_pago,
             // cancelada: this.state.cancelada
@@ -189,6 +189,7 @@ export class InternalReservasEdit extends Component {
         }
     }
 
+
     handleChangeCorte = (selectedOption) => {
         if (selectedOption !== null) {
             this.setState({ id_corte: selectedOption.value });
@@ -222,14 +223,14 @@ export class InternalReservasEdit extends Component {
 
         const cortes = this.state.cortes || [];
         const corte_list = cortes.map(corte => ({
-            value: corte.corte_tipo,
+            value: corte.id_corte,
             label: corte.corte_tipo
 
         }));
 
         const metodo_pago = this.state.metodo_pago || [];
         const pago_list = metodo_pago.map(pago => ({
-            value: pago.metodo,
+            value: pago.id_pago,
             label: pago.metodo
 
         }));
