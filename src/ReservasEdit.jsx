@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Select from 'react-select'
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
+import jwt_decode from "jwt-decode";
 
 export class InternalReservasEdit extends Component {
 
@@ -15,7 +16,7 @@ export class InternalReservasEdit extends Component {
             fecha: new Date(),
             horarios: [],
             hora: null,
-            id_usuario: null,
+            id_usuario: [],
             cortes: [],
             id_corte: null,
             metodo_pago: [],
@@ -39,15 +40,67 @@ export class InternalReservasEdit extends Component {
 
     componentDidMount() {
 
+        var tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+        const mail = tokenDecoded.mail;
+        console.log(mail)
+
         this.fetchHora();
         this.fetchCorte();
         this.fetchPago();
-        const userId = obtenerIdUsuarioEnSesion();
+        this.fetchUser(mail);
+        // const userId = obtenerIdUsuarioEnSesion();
 
-        if (userId) {
-            this.setState({ id_usuario: userId });
-        }
+        // if (userId) {
+        //     this.setState({ id_usuario: userId });
+        // }
     }
+
+
+    fetchUser(mail) {
+        fetch(`http://localhost:8080/user/${mail}`)
+            .then(res => {
+                return res.json()
+                    .then(body => {
+                        return {
+                            status: res.status,
+                            ok: res.ok,
+                            headers: res.headers,
+                            body: body
+                        };
+                    })
+            })
+            .then(
+                result => {debugger
+                    if (result.ok) {debugger
+                        this.setState({ id_usuario: result.body.id_usuario });
+
+                        // Llamar a handleSubmit para crear la reserva con el id_usuario
+                    // this.handleSubmit();
+                    } else {
+                        toast.error(result.body.message, this.configTosti);
+                    }
+                }
+            )
+            .catch(error => console.error('Error en la primera petición:', error));
+    }
+
+    // fetchUser(mail) {
+    //     fetch(`http://localhost:8080/user/${mail}`)
+    //         .then(res => res.json())
+    //         .then(result => {debugger
+    //             if (result.id_usuario) {debugger
+    //                 this.setState({ id_usuario: result.id_usuario });
+    //                 this.handleSubmit(); // Llamar a handleSubmit después de establecer id_usuario
+    //             } else {
+    //                 toast.error('No se pudo obtener el ID de usuario', this.configTosti);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Error en la primera petición:', error);
+    //             toast.error('Error al obtener el ID de usuario', this.configTosti);
+    //         });
+    // }
+    
 
 
     fetchHora() {
@@ -130,16 +183,17 @@ export class InternalReservasEdit extends Component {
 
 
 
-        handleSubmit = (event) => {
+    handleSubmit = (event) => {
+
         event.preventDefault()
 
         let reserva = {
             fecha: this.state.fecha,
             hora: this.state.hora,
-            id_usuario: 2,
+            id_usuario: this.state.id_usuario, // Asegúrate de que este valor se haya establecido correctamente
             id_corte: this.state.id_corte,
             id_pago: this.state.id_pago,
-            // cancelada: this.state.cancelada
+            // cancelada: false // Otra opción si cancelada siempre es falsa
         }
 
         let parametros = {
@@ -150,29 +204,70 @@ export class InternalReservasEdit extends Component {
             }
         }
         fetch('http://localhost:8080/reservas/create', parametros)
-        .then(res => {debugger
-            return res.json()
-                .then(body => {
-                    return {
-                        status: res.status,
-                        ok: res.ok,
-                        headers: res.headers,
-                        body: body
-                    };
-                })
-        }).then(
-            result => {
-                if (result.ok) {
-                    toast.success(result.body.message, this.configTosti);
-                    this.props.navigate("/reservas")
-                } else {
-                    toast.error(result.body.message, this.configTosti);
+            .then(res => {
+                return res.json()
+                    .then(body => {
+                        return {
+                            status: res.status,
+                            ok: res.ok,
+                            headers: res.headers,
+                            body: body
+                        };
+                    })
+            }).then(
+                result => {
+                    if (result.ok) {
+                        toast.success(result.body.message, this.configTosti);
+                        this.props.navigate("/reservas")
+                    } else {
+                        toast.error(result.body.message, this.configTosti);
+                    }
                 }
-            }
-        ).catch(
-            (error) => { console.log(error) }
-        );
+            ).catch(
+                (error) => { console.log(error) }
+            );
     }
+
+    // handleSubmit = (event) => {
+    //     event.preventDefault();
+    
+    //     if (this.state.id_usuario) { // Asegúrate de que id_usuario no esté vacío
+    //         let reserva = {
+    //             fecha: this.state.fecha,
+    //             hora: this.state.hora,
+    //             id_usuario: this.state.id_usuario,
+    //             id_corte: this.state.id_corte,
+    //             id_pago: this.state.id_pago,
+    //             // cancelada: false
+    //         };
+    
+    //         let parametros = {
+    //             method: 'POST',
+    //             body: JSON.stringify(reserva),
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             }
+    //         };
+    
+    //         fetch('http://localhost:8080/reservas/create', parametros)
+    //             .then(res => res.json())
+    //             .then(result => {
+    //                 if (result.ok) {
+    //                     toast.success(result.body.message, this.configTosti);
+    //                     this.props.navigate("/reservas");
+    //                 } else {
+    //                     toast.error(result.body.message, this.configTosti);
+    //                 }
+    //             })
+    //             .catch(error => {
+    //                 console.log(error);
+    //                 toast.error('Error al crear la reserva', this.configTosti);
+    //             });
+    //     } else {
+    //         toast.error('ID de usuario no válido', this.configTosti);
+    //     }
+    // }
+    
 
 
     handleChangeFecha = (fechaSeleccionada) => {
@@ -210,9 +305,9 @@ export class InternalReservasEdit extends Component {
 
 
 
-
-
     render() {
+
+
 
         const horarios = this.state.horarios || [];
         const horarios_list = horarios.map(hora => ({
@@ -237,7 +332,7 @@ export class InternalReservasEdit extends Component {
 
 
         const espacio = <>&nbsp;</>;
-        
+
 
         return (
             <>
@@ -307,19 +402,19 @@ export class InternalReservasEdit extends Component {
     }
 }
 
-function obtenerIdUsuarioEnSesion() {
-    // En este ejemplo, asumimos que tienes un token JWT almacenado en el almacenamiento local (localStorage) después de iniciar sesión.
-    const token = localStorage.getItem('token');
+// function obtenerIdUsuarioEnSesion() {
+//     // En este ejemplo, asumimos que tienes un token JWT almacenado en el almacenamiento local (localStorage) después de iniciar sesión.
+//     const token = localStorage.getItem('token');
 
-    if (token) {
-        // Decodificar el token y extraer el ID del usuario
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        return payload.id_usuario;
-    } else {
-        // Si no hay token, el usuario no está autenticado
-        return null;
-    }
-}
+//     if (token) {
+//         // Decodificar el token y extraer el ID del usuario
+//         const payload = JSON.parse(atob(token.split('.')[1]));
+//         return payload.id_usuario;
+//     } else {
+//         // Si no hay token, el usuario no está autenticado
+//         return null;
+//     }
+// }
 
 
 export default ReservasEdit
