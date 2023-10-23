@@ -115,7 +115,8 @@ export class InternalRegistro extends Component {
                             id="nombre" 
                             placeholder="name@example.com"
                             onChange={this.handleChangeNombre}
-                            name="nombre" />
+                            name="nombre" 
+                            required/>
                             <label for="nombre">Ingrese su nombre</label>
                         </div>
                         <div className="form-floating mb-3">
@@ -124,7 +125,8 @@ export class InternalRegistro extends Component {
                             id="apellido" 
                             placeholder="name@example.com"
                             onChange={this.handleChangeApellido}
-                            name="apellido" />
+                            name="apellido"
+                            required />
                             <label for="apellido">Ingrese su apellido</label>
                         </div>
                         <div className="form-floating mb-3">
@@ -133,7 +135,8 @@ export class InternalRegistro extends Component {
                             id="mail" 
                             placeholder="name@example.com"
                             onChange={this.handleChangeMail}
-                            name="mail" />
+                            name="mail"
+                            required />
                             <label for="correo">Correo Electrónico</label>
                         </div>
                         <div className="form-floating">
@@ -142,10 +145,11 @@ export class InternalRegistro extends Component {
                             id="contrasena" 
                             placeholder="Password"
                             onChange={this.handleChangeContrasena}
-                            name="contrasena" />
+                            name="contrasena"
+                            required />
                             <label for="contrasena">Contraseña</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
                     </div>
                 </form >
 

@@ -51,7 +51,8 @@ function Menu() {
                 </li>
               </ul>
             </div>
-            {decoded.mail}
+            <div className="mail"> {decoded.mail}</div>
+           
 
             <button type="button" className='btn btn-danger' onClick={() => logout()}>
               <span className="material-symbols-outlined">

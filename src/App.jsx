@@ -25,7 +25,7 @@ function App() {
           <Route path="/reservas/edit/:id_reserva" element={<ReservasEdit />}></Route>
           <Route path="/horario" element={<Horario/>}></Route>
           <Route path="/horario/edit" element={<Horario/>}></Route>
-          <Route path="/horario/edit/hora" element={<Horario/>}></Route>
+          <Route path="/horario/edit/:hora" element={<Horario/>}></Route>
         </Routes>
       </div>
       <ToastContainer></ToastContainer>

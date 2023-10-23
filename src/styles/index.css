@@ -26,6 +26,10 @@
   color: rgb(214, 214, 214) !important;
 }
 
+.mail{
+  color: rgb(214, 214, 214);
+  margin: 8px;
+}
 
 /* .sesion{
   right: 500px !important;

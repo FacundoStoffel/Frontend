@@ -359,8 +359,9 @@ export class InternalReservasEdit extends Component {
                         isSearchable={true}
                         isDisabled={false}
                         closeMenuOnSelect={true}
-
+                        required
                         onChange={this.handleChangeHora}>
+                            
 
                     </Select>
 
@@ -373,7 +374,7 @@ export class InternalReservasEdit extends Component {
                             isSearchable={true}
                             isDisabled={false}
                             closeMenuOnSelect={true}
-
+                            required
                             onChange={this.handleChangeCorte}>
 
                         </Select>
@@ -388,7 +389,7 @@ export class InternalReservasEdit extends Component {
                             isSearchable={true}
                             isDisabled={false}
                             closeMenuOnSelect={true}
-
+                            required
                             onChange={this.handleChangePago}>
 
                         </Select>

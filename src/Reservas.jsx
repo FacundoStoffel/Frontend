@@ -82,10 +82,10 @@ export class Reservas extends Component {
         <tr key={index}>
           <td>{this.convertirFecha(reserva.fecha)}</td>
           <td>{reserva.hora}</td>
-          <td>{reserva.id_usuario}</td>
-          <td>{reserva.id_corte}</td>
-          <td>{reserva.id_pago}</td>
-          <td>{reserva.cancelada}</td>
+          <td>{reserva.nombre_completo}</td>
+          <td>{reserva.corte_tipo}</td>
+          <td>{reserva.metodo}</td>
+          {/* <td>{reserva.cancelada}</td> */}
           <td>
             <Link to={`/reservas/edit/${reserva.id_reserva}`} className='btn btn-primary'>
               <span class="material-symbols-outlined">
