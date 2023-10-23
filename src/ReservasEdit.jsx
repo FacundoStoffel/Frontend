@@ -16,7 +16,7 @@ export class InternalReservasEdit extends Component {
             fecha: new Date(),
             horarios: [],
             hora: null,
-            id_usuario: [],
+            id_usuario: null,
             cortes: [],
             id_corte: null,
             metodo_pago: [],
@@ -47,7 +47,7 @@ export class InternalReservasEdit extends Component {
         this.fetchHora();
         this.fetchCorte();
         this.fetchPago();
-        this.fetchUser(mail);
+        // this.fetchUser(mail);
         // const userId = obtenerIdUsuarioEnSesion();
 
         // if (userId) {
@@ -55,35 +55,36 @@ export class InternalReservasEdit extends Component {
         // }
     }
 
+// no funca
+//     fetchUser(mail) {
+//         fetch(`http://localhost:8080/user/${mail}`)
+//             .then(res => {
+//                 return res.json()
+//                     .then(body => {
+//                         return {
+//                             status: res.status,
+//                             ok: res.ok,
+//                             headers: res.headers,
+//                             body: body
+//                         };
+//                     })
+//             })
+//             .then(
+//                 result => {debugger
+//                     if (result.ok) {debugger
+//                         this.setState({ id_usuario: result.body.id_usuario });
 
-    fetchUser(mail) {
-        fetch(`http://localhost:8080/user/${mail}`)
-            .then(res => {
-                return res.json()
-                    .then(body => {
-                        return {
-                            status: res.status,
-                            ok: res.ok,
-                            headers: res.headers,
-                            body: body
-                        };
-                    })
-            })
-            .then(
-                result => {debugger
-                    if (result.ok) {debugger
-                        this.setState({ id_usuario: result.body.id_usuario });
+//                         // Llamar a handleSubmit para crear la reserva con el id_usuario
+//                     // this.handleSubmit();
+//                     } else {
+//                         toast.error(result.body.message, this.configTosti);
+//                     }
+//                 }
+//             )
+//             .catch(error => console.error('Error en la primera petición:', error));
+//     }
 
-                        // Llamar a handleSubmit para crear la reserva con el id_usuario
-                    // this.handleSubmit();
-                    } else {
-                        toast.error(result.body.message, this.configTosti);
-                    }
-                }
-            )
-            .catch(error => console.error('Error en la primera petición:', error));
-    }
-
+    // otro intento del fetchUser el primero ta mas lindo
     // fetchUser(mail) {
     //     fetch(`http://localhost:8080/user/${mail}`)
     //         .then(res => res.json())
@@ -190,7 +191,7 @@ export class InternalReservasEdit extends Component {
         let reserva = {
             fecha: this.state.fecha,
             hora: this.state.hora,
-            id_usuario: this.state.id_usuario, // Asegúrate de que este valor se haya establecido correctamente
+            id_usuario: 2,
             id_corte: this.state.id_corte,
             id_pago: this.state.id_pago,
             // cancelada: false // Otra opción si cancelada siempre es falsa
