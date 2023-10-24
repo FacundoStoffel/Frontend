@@ -26,6 +26,59 @@ export class InternalHorarioEdit extends Component {
         theme: "light",
     }
 
+
+    componentDidMount() {
+        
+        if (this.props.params.hora) {
+           
+            let parametros = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'authorization': sessionStorage.getItem('token')
+                }
+            }
+      
+            fetch(`http://localhost:8080/hora/${this.props.params.hora}`, parametros)
+                .then(res => {
+                    return res.json()
+                        .then(body => {
+                            return {
+                                status: res.status,
+                                ok: res.ok,
+                                headers: res.headers,
+                                body: body
+                            };
+                        })
+                }).then(
+                    
+                    result => {
+                        if (result.ok) {
+                            this.setState({
+                                hora: result.body.detail.hora,
+                            });
+                        } else {
+                            toast.error(result.body.message, {
+                                position: "bottom-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            });
+                        }
+                    }
+
+                ).catch(
+                    (error) => { console.log(error) }
+                );
+        }
+    }
+
+
     handleSubmit = (event) => {
 
         event.preventDefault()
@@ -36,13 +89,14 @@ export class InternalHorarioEdit extends Component {
         }
 
         let parametros = {
-            method: 'POST',
+            method: this.props.params.hora ? 'PUT' : 'POST',
             body: JSON.stringify(nueva_hora),
             headers: {
                 'Content-Type': 'application/json',
             }
         }
-        fetch('http://localhost:8080/hora/create', parametros)
+        const url = this.props.params.hora ? `http://localhost:8080/hora/edit/${this.props.params.hora}` : "http://localhost:8080/hora/create"
+        fetch(url, parametros)
             .then(res => {
                 return res.json()
                     .then(body => {
@@ -74,7 +128,7 @@ export class InternalHorarioEdit extends Component {
     render() {
         return (
             <>
-                <h1>Nuevo Horario</h1>
+                <h1>{this.props.params.hora ? `Edicion del Horario de las ${this.props.params.hora}` : "Nuevo Horario"}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-floating mb-3">
                         <input type="text"
@@ -84,7 +138,7 @@ export class InternalHorarioEdit extends Component {
                             onChange={this.handleChangeHora}
                             name="hora"
                             required />
-                        <label for="hora">Ingrese el nuevo horario</label>
+                        <label for="hora">Ingrese el horario (en formato 00:00)</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Confirmar</button>
 
