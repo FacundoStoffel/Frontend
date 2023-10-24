@@ -22,6 +22,7 @@ export class InternalReservasEdit extends Component {
             metodo_pago: [],
             id_pago: null,
             // cancelada: null
+            reservaSeleccionada: null
         }
     }
 
@@ -47,6 +48,9 @@ export class InternalReservasEdit extends Component {
         this.fetchHora();
         this.fetchCorte();
         this.fetchPago();
+        if (this.props.params.id_reserva) {
+            this.fetchReserva();
+        }
         // this.fetchUser(mail);
         // const userId = obtenerIdUsuarioEnSesion();
 
@@ -102,6 +106,31 @@ export class InternalReservasEdit extends Component {
     //         });
     // }
     
+
+    fetchReserva() {
+        fetch(`http://localhost:8080/reservas/${this.props.params.id_reserva}`)
+            .then(res => {
+                return res.json()
+                    .then(body => {
+                        return {
+                            status: res.status,
+                            ok: res.ok,
+                            headers: res.headers,
+                            body: body
+                        };
+                    })
+            })
+            .then(
+                result => {
+                    if (result.ok) {
+                        this.setState({ reservaSeleccionada: result.body.detail });
+                    } else {
+                        toast.error(result.body.message, this.configTosti);
+                    }
+                }
+            )
+            .catch(error => console.error('Error en la primera petición:', error));
+    }
 
 
     fetchHora() {
@@ -198,13 +227,16 @@ export class InternalReservasEdit extends Component {
         }
 
         let parametros = {
-            method: 'POST',
+            method: this.props.params.id_reserva ? 'PUT' : 'POST',
             body: JSON.stringify(reserva),
             headers: {
                 'Content-Type': 'application/json',
             }
         }
-        fetch('http://localhost:8080/reservas/create', parametros)
+        const url = this.props.params.id_reserva
+            ? `http://localhost:8080/reservas/edit/${this.props.params.id_reserva}`
+            : "http://localhost:8080/reservas/create"
+        fetch(url, parametros)
             .then(res => {
                 return res.json()
                     .then(body => {
@@ -337,7 +369,7 @@ export class InternalReservasEdit extends Component {
 
         return (
             <>
-                <h1>Nueva Reserva</h1>
+                <h1>{this.props.params.id_reserva ? `Edicion de la Reserva ${this.props.params.id_reserva}` : "Nueva Reserva"}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="col-sm-4 col-md-3">
                         <label htmlFor="fecha">Fecha: {espacio}</label>

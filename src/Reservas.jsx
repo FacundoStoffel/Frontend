@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 // import jwt_decode from "jwt-decode";
 
 export class Reservas extends Component {
@@ -63,6 +65,39 @@ export class Reservas extends Component {
       );
   };
 
+  handleClickCancelar = () => {
+    let parametros = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }
+    const url = `http://localhost:8080/reservas/cancelar/${this.state.idToDelete}`
+    fetch(url, parametros)
+      .then(res => {
+        return res.json()
+          .then(body => {
+            return {
+              status: res.status,
+              ok: res.ok,
+              headers: res.headers,
+              body: body
+            };
+          })
+      }).then(
+        result => {
+          if (result.ok) {
+            toast.success(result.body.message, this.configTosti);
+            this.componentDidMount();
+          } else {
+            toast.error(result.body.message, this.configTosti);
+          }
+        }
+      ).catch(
+        (error) => { console.log(error) }
+      );
+  }
+
 
   convertirFecha = (date) => {
     const fecha = new Date(date);
@@ -71,6 +106,21 @@ export class Reservas extends Component {
     const anio = fecha.getUTCFullYear();
     return `${dia}/${mes}/${anio}`;
   }
+
+  showModal = (id_reserva) => {
+    this.setState({
+      modal: true,
+      idToDelete: id_reserva
+    })
+
+  }
+
+  closeModal = () => {
+    this.setState({
+        modal: false,
+        idToDelete: null
+    })
+}
 
 
 
@@ -92,6 +142,11 @@ export class Reservas extends Component {
                 edit
               </span>
             </Link>
+            <button className='btn btn-outline-danger' onClick={() => this.showModal(reserva.id_reserva)}>
+              <span className="material-symbols-outlined">
+                cancel
+              </span>
+            </button>
           </td>
         </tr>
       )
@@ -100,23 +155,39 @@ export class Reservas extends Component {
     return (
       <>
         <h1>Reservas</h1>
+        <div>
+          <table className='table table-striped'>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Usuario</th>
+                <th>Corte</th>
+                <th>Pago</th>
+                {/* <th>Cancelada</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {reservas_list}
+            </tbody>
+          </table>
+          <Link to={"/reservas/edit"} className='btn btn-primary'>Nueva Reserva</Link>
+        </div>
 
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Hora</th>
-              <th>Usuario</th>
-              <th>Corte</th>
-              <th>Pago</th>
-              <th>Cancelada</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reservas_list}
-          </tbody>
-        </table>
-        <Link to={"/reservas/edit"} className='btn btn-primary'>Nueva Reserva</Link>
+        <Modal show={this.state.modal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Cancelación de Reserva</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>¿Está seguro/a de cancelar la reserva seleccionada?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={this.closeModal}>
+              Volver
+            </Button>
+            <Button variant="danger" onClick={this.handleClickCancelar}>
+              Confirmar
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </>
     )
   }

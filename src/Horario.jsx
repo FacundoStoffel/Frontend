@@ -88,7 +88,10 @@ export class Horario extends Component {
         return (
             <>
                 <h1>Horarios</h1>
-
+                <div className='ml-auto d-flex '>
+                <Link to={"/horario/edit"} className='btn btn-primary'>Nuevo Horario</Link>
+                </div>
+            
                 <table className='table table-striped'>
                     <thead>
                         <tr>
@@ -101,7 +104,7 @@ export class Horario extends Component {
                         {horarios_list}
                     </tbody>
                 </table>
-                <Link to={"/horario/edit"} className='btn btn-primary'>Nuevo Horario</Link>
+                {/* <Link to={"/horario/edit"} className='btn btn-primary'>Nuevo Horario</Link> */}
 
             </>
         )
