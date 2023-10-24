@@ -101,7 +101,7 @@ export class Horario extends Component {
                         {horarios_list}
                     </tbody>
                 </table>
-                <Link to={"/reservas/edit"} className='btn btn-primary'>Nuevo Horario</Link>
+                <Link to={"/horario/edit"} className='btn btn-primary'>Nuevo Horario</Link>
 
             </>
         )
