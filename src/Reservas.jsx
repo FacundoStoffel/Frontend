@@ -4,9 +4,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate, useParams } from 'react-router-dom'
 // import jwt_decode from "jwt-decode";
 
-export class Reservas extends Component {
+export class InternalReservas extends Component {
 
   constructor(props) {
     super(props)
@@ -99,6 +100,61 @@ export class Reservas extends Component {
   }
 
 
+  handleClickFinalizar = (id_reserva) => {
+    let parametros = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const url = `http://localhost:8080/reservas/delete/${id_reserva}`
+    fetch(url, parametros)
+        .then(res => {
+            return res.json()
+                .then(body => {
+                    return {
+                        status: res.status,
+                        ok: res.ok,
+                        headers: res.headers,
+                        body: body
+                    };
+                })
+        }).then(
+            result => {
+                if (result.ok) {
+                    toast.success(result.body.message, {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                    this.componentDidMount();
+                    this.props.navigate("/reservas")
+                    window.location.reload();
+                } else {
+                    toast.error(result.body.message, {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                }
+            }
+        ).catch(
+            (error) => { console.log(error) }
+        );
+
+}
+
+
   convertirFecha = (date) => {
     const fecha = new Date(date);
     const dia = fecha.getUTCDate().toString().padStart(2, '0');
@@ -117,10 +173,10 @@ export class Reservas extends Component {
 
   closeModal = () => {
     this.setState({
-        modal: false,
-        idToDelete: null
+      modal: false,
+      idToDelete: null
     })
-}
+  }
 
 
 
@@ -145,6 +201,11 @@ export class Reservas extends Component {
             <button className='btn btn-outline-danger' onClick={() => this.showModal(reserva.id_reserva)}>
               <span className="material-symbols-outlined">
                 cancel
+              </span>
+            </button>
+            <button className='btn btn-outline-success' onClick={() => this.handleClickFinalizar(reserva.id_reserva)} >
+              <span class="material-symbols-outlined">
+                done
               </span>
             </button>
           </td>
@@ -194,3 +255,13 @@ export class Reservas extends Component {
 }
 
 export default Reservas
+
+export function Reservas() {
+  const navigate = useNavigate();
+  const p = useParams();
+  return (
+      <>
+          <InternalReservas navigate={navigate} params={p} />
+      </>
+  );
+}
