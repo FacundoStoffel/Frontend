@@ -1,0 +1,22 @@
+.form{
+        background-color: rgba(53, 53, 53, 0.5);
+        margin: 50px;
+        padding: 40px;
+        border-radius: 10px;
+        /* opacity: 0.5; */
+}
+
+button{
+    margin: 20px 0 10px 0;
+    font-family: Lora !important;
+    /* background-color: rgb(41, 37, 83) !important;
+    border-color: rgb(41, 37, 83) !important; */
+}
+
+input{
+    background-color: rgb(218, 218, 218) !important;
+    font-family: Lora !important;
+}
+label{
+    font-family: Lora !important;
+}

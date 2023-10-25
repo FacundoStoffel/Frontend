@@ -1,0 +1,28 @@
+.form {
+    background-color: rgba(53, 53, 53, 0.5);
+    margin: 50px;
+    padding: 40px;
+    border-radius: 10px;
+    color: rgb(238, 238, 238);
+}
+
+#hora{
+    color: black;
+}
+
+#corte{
+    color: black;
+}
+
+#pago{
+    color: black;
+}
+
+Select{
+    background-color: aliceblue;
+}
+
+#fecha{
+    background-color: rgb(255, 255, 255) !important;
+    border-radius: 5px;
+}

@@ -6,6 +6,7 @@ import Select from 'react-select'
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import jwt_decode from "jwt-decode";
+import './../styles/reservasEdit.css';
 
 export class InternalReservasEdit extends Component {
 
@@ -59,34 +60,34 @@ export class InternalReservasEdit extends Component {
         // }
     }
 
-// no funca
-//     fetchUser(mail) {
-//         fetch(`http://localhost:8080/user/${mail}`)
-//             .then(res => {
-//                 return res.json()
-//                     .then(body => {
-//                         return {
-//                             status: res.status,
-//                             ok: res.ok,
-//                             headers: res.headers,
-//                             body: body
-//                         };
-//                     })
-//             })
-//             .then(
-//                 result => {
-//                     if (result.ok) {
-//                         this.setState({ id_usuario: result.body.id_usuario });
+    // no funca
+    //     fetchUser(mail) {
+    //         fetch(`http://localhost:8080/user/${mail}`)
+    //             .then(res => {
+    //                 return res.json()
+    //                     .then(body => {
+    //                         return {
+    //                             status: res.status,
+    //                             ok: res.ok,
+    //                             headers: res.headers,
+    //                             body: body
+    //                         };
+    //                     })
+    //             })
+    //             .then(
+    //                 result => {
+    //                     if (result.ok) {
+    //                         this.setState({ id_usuario: result.body.id_usuario });
 
-//                         // Llamar a handleSubmit para crear la reserva con el id_usuario
-//                     // this.handleSubmit();
-//                     } else {
-//                         toast.error(result.body.message, this.configTosti);
-//                     }
-//                 }
-//             )
-//             .catch(error => console.error('Error en la primera petición:', error));
-//     }
+    //                         // Llamar a handleSubmit para crear la reserva con el id_usuario
+    //                     // this.handleSubmit();
+    //                     } else {
+    //                         toast.error(result.body.message, this.configTosti);
+    //                     }
+    //                 }
+    //             )
+    //             .catch(error => console.error('Error en la primera petición:', error));
+    //     }
 
     // otro intento del fetchUser el primero ta mas lindo
     // fetchUser(mail) {
@@ -105,7 +106,7 @@ export class InternalReservasEdit extends Component {
     //             toast.error('Error al obtener el ID de usuario', this.configTosti);
     //         });
     // }
-    
+
 
     fetchReserva() {
         fetch(`http://localhost:8080/reservas/${this.props.params.id_reserva}`)
@@ -264,7 +265,7 @@ export class InternalReservasEdit extends Component {
 
     // handleSubmit = (event) => {
     //     event.preventDefault();
-    
+
     //     if (this.state.id_usuario) { // Asegúrate de que id_usuario no esté vacío
     //         let reserva = {
     //             fecha: this.state.fecha,
@@ -274,7 +275,7 @@ export class InternalReservasEdit extends Component {
     //             id_pago: this.state.id_pago,
     //             // cancelada: false
     //         };
-    
+
     //         let parametros = {
     //             method: 'POST',
     //             body: JSON.stringify(reserva),
@@ -282,7 +283,7 @@ export class InternalReservasEdit extends Component {
     //                 'Content-Type': 'application/json',
     //             }
     //         };
-    
+
     //         fetch('http://localhost:8080/reservas/create', parametros)
     //             .then(res => res.json())
     //             .then(result => {
@@ -301,7 +302,7 @@ export class InternalReservasEdit extends Component {
     //         toast.error('ID de usuario no válido', this.configTosti);
     //     }
     // }
-    
+
 
 
     handleChangeFecha = (fechaSeleccionada) => {
@@ -371,7 +372,7 @@ export class InternalReservasEdit extends Component {
         return (
             <>
                 <h1>{this.props.params.id_reserva ? `Edicion de la Reserva ${this.props.params.id_reserva}` : "Nueva Reserva"}</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className="form">
                     <div className="col-sm-4 col-md-3">
                         <label htmlFor="fecha">Fecha: {espacio}</label>
                         <DatePicker
@@ -394,7 +395,8 @@ export class InternalReservasEdit extends Component {
                         closeMenuOnSelect={true}
                         required
                         onChange={this.handleChangeHora}>
-                            
+    
+
 
                     </Select>
 

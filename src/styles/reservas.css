@@ -1,0 +1,27 @@
+.tabla{
+    background-color: rgba(53, 53, 53, 0.5);
+        margin: 50px;
+        padding: 40px;
+        border-radius: 10px;
+}
+.table{
+    border-radius: 10px !important;
+}
+
+#tabla{
+    border-radius: 10px !important;
+    font-family: Lora !important;
+}
+
+button{
+    margin: 5px;
+    font-family: Lora !important;
+}
+
+.btn{
+    font-family: Lora !important;
+}
+
+.modal{
+    font-family: Lora !important;
+}

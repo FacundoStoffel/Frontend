@@ -97,8 +97,8 @@ export class InternalLogin extends Component {
         return (
             <>
                 <h1>Iniciar Sesión</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div class="login">
+                <form onSubmit={this.handleSubmit} className="form">
+                    <div className="login">
                         <div className="form-floating mb-3">
                             <input type="email"
                                 className="form-control"
@@ -106,7 +106,7 @@ export class InternalLogin extends Component {
                                 placeholder="name@example.com"
                                 onChange={this.handleChangeMail}
                                 name="mail" />
-                            <label for="correo">Correo Electrónico</label>
+                            <label htmlFor="correo">Correo Electrónico</label>
                         </div>
                         <div className="form-floating">
                             <input type="password"
@@ -115,7 +115,7 @@ export class InternalLogin extends Component {
                                 placeholder="Password"
                                 onChange={this.handleChangeContrasena}
                                 name="contrasena" />
-                            <label for="contrasena">Contraseña</label>
+                            <label htmlFor="contrasena">Contraseña</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                     </div>

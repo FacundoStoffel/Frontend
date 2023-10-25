@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate, useParams } from 'react-router-dom'
+import './../styles/reservas.css';
 // import jwt_decode from "jwt-decode";
 
 export class InternalReservas extends Component {
@@ -193,10 +194,11 @@ export class InternalReservas extends Component {
           <td>{reserva.nombre_completo}</td>
           <td>{reserva.corte_tipo}</td>
           <td>{reserva.metodo}</td>
+
           {/* <td>{reserva.cancelada}</td> */}
           <td>
             <Link to={`/reservas/edit/${reserva.id_reserva}`} className='btn btn-primary'>
-              <span class="material-symbols-outlined">
+              <span className="material-symbols-outlined">
                 edit
               </span>
             </Link>
@@ -206,7 +208,7 @@ export class InternalReservas extends Component {
               </span>
             </button>
             <button className='btn btn-outline-success' onClick={() => this.handleClickFinalizar(reserva.id_reserva)} >
-              <span class="material-symbols-outlined">
+              <span className="material-symbols-outlined">
                 done
               </span>
             </button>
@@ -218,8 +220,8 @@ export class InternalReservas extends Component {
     return (
       <>
         <h1>Reservas</h1>
-        <div>
-          <table className='table table-striped'>
+        <div className="tabla">
+          <table className='table table-striped' id="tabla">
             <thead>
               <tr>
                 <th>Fecha</th>
@@ -227,6 +229,7 @@ export class InternalReservas extends Component {
                 <th>Usuario</th>
                 <th>Corte</th>
                 <th>Pago</th>
+                <th></th>
                 {/* <th>Cancelada</th> */}
               </tr>
             </thead>

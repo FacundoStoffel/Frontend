@@ -6,17 +6,53 @@ body {
 
 
 h1{
-    color: rgb(224, 224, 224);
+    color: rgb(238, 238, 238);
     font-size: 4rem;
-    margin: 50px 0;
+    margin: 40px 0 10px 0;
+    font-family: Lora;
+    display: flex;
+    justify-content: center;
 }
 
 h3{
-    color: rgb(224, 224, 224);
+    color: rgb(238, 238, 238);
     font-size: 2rem;
+    font-family: Lora;
+    display: flex;
+    justify-content: center;
+    
 }
 
 p{
-    color: rgb(224, 224, 224);
+    color: rgb(238, 238, 238);
     font-size: 2rem;
+    font-family: Lora;
+    opacity: 1 !important;
+}
+
+.descrip{
+    background-color: rgba(53, 53, 53, 0.5);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    /* opacity: 0.5; */
+}
+
+.descrip p{
+    opacity: 1;
+}
+
+.link{
+    /* text-decoration: none; */
+    color: rgb(238, 238, 238);
+    
+}
+
+.link:hover{
+
+    color: #535353;
+}
+
+.sec{
+    font-size: 1.7rem;
 }
