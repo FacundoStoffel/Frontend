@@ -30,7 +30,7 @@ function Menu() {
             <a class="navbar-brand " href="/">
               <img src="./logo.png" class="logo" alt="Logo" width="50" height="50" />
             </a>
-            <a className="navbar-brand letra" href="/">Barberia</a>
+            <a className="navbar-brand letra" href="/">Leviatán Barber</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -72,7 +72,7 @@ function Menu() {
             <a class="navbar-brand " href="/">
               <img src="./logo.png" class="logo" alt="Logo" width="50" height="50" />
             </a>
-            <a className="navbar-brand letra" href="/">Barberia</a>
+            <a className="navbar-brand letra" href="/">Leviatán Barber</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

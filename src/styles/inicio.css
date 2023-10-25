@@ -1,0 +1,22 @@
+body {
+    background-image: url(/public/img/shop-4.jpg);
+    background-size: 100% ;
+
+}
+
+
+h1{
+    color: rgb(224, 224, 224);
+    font-size: 4rem;
+    margin: 50px 0;
+}
+
+h3{
+    color: rgb(224, 224, 224);
+    font-size: 2rem;
+}
+
+p{
+    color: rgb(224, 224, 224);
+    font-size: 2rem;
+}

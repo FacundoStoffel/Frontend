@@ -3,13 +3,13 @@ import './styles/App.css';
 import Inicio from "./Inicio";
 import Login from "./Login";
 import Menu from "./Menu";
-import Reservas from "./Reservas";
-import { ReservasEdit } from "./ReservasEdit";
+import Reservas from "./components/Reservas";
+import { ReservasEdit } from "./components/ReservasEdit";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Registro from "./Registro";
-import Horario from "./Horario";
-import HorarioEdit from "./HorarioEdit";
+import Horario from "./components/Horario";
+import HorarioEdit from "./components/HorarioEdit";
 
 
 function App() {

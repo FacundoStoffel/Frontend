@@ -42,8 +42,8 @@ export class InternalReservasEdit extends Component {
     componentDidMount() {
 
         var tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
-        const mail = tokenDecoded.mail;
-        console.log(mail)
+        const id_usuario = tokenDecoded.id_usuario;
+        this.setState({ id_usuario });
 
         this.fetchHora();
         this.fetchCorte();
@@ -74,8 +74,8 @@ export class InternalReservasEdit extends Component {
 //                     })
 //             })
 //             .then(
-//                 result => {debugger
-//                     if (result.ok) {debugger
+//                 result => {
+//                     if (result.ok) {
 //                         this.setState({ id_usuario: result.body.id_usuario });
 
 //                         // Llamar a handleSubmit para crear la reserva con el id_usuario
@@ -92,8 +92,8 @@ export class InternalReservasEdit extends Component {
     // fetchUser(mail) {
     //     fetch(`http://localhost:8080/user/${mail}`)
     //         .then(res => res.json())
-    //         .then(result => {debugger
-    //             if (result.id_usuario) {debugger
+    //         .then(result => {
+    //             if (result.id_usuario) {
     //                 this.setState({ id_usuario: result.id_usuario });
     //                 this.handleSubmit(); // Llamar a handleSubmit después de establecer id_usuario
     //             } else {
@@ -220,7 +220,7 @@ export class InternalReservasEdit extends Component {
         let reserva = {
             fecha: this.state.fecha,
             hora: this.state.hora,
-            id_usuario: 2,
+            id_usuario: this.state.id_usuario,
             id_corte: this.state.id_corte,
             id_pago: this.state.id_pago,
             // cancelada: false // Otra opción si cancelada siempre es falsa
