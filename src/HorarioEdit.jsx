@@ -93,6 +93,7 @@ export class InternalHorarioEdit extends Component {
             body: JSON.stringify(nueva_hora),
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem('token')
             }
         }
         const url = this.props.params.hora ? `http://localhost:8080/hora/edit/${this.props.params.hora}` : "http://localhost:8080/hora/create"

@@ -71,6 +71,7 @@ export class InternalReservas extends Component {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
       }
     }
     const url = `http://localhost:8080/reservas/cancelar/${this.state.idToDelete}`
@@ -102,57 +103,58 @@ export class InternalReservas extends Component {
 
   handleClickFinalizar = (id_reserva) => {
     let parametros = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': sessionStorage.getItem('token')
+      }
     }
     const url = `http://localhost:8080/reservas/delete/${id_reserva}`
     fetch(url, parametros)
-        .then(res => {
-            return res.json()
-                .then(body => {
-                    return {
-                        status: res.status,
-                        ok: res.ok,
-                        headers: res.headers,
-                        body: body
-                    };
-                })
-        }).then(
-            result => {
-                if (result.ok) {
-                    toast.success(result.body.message, {
-                        position: "bottom-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    });
-                    this.componentDidMount();
-                    this.props.navigate("/reservas")
-                    window.location.reload();
-                } else {
-                    toast.error(result.body.message, {
-                        position: "bottom-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    });
-                }
-            }
-        ).catch(
-            (error) => { console.log(error) }
-        );
+      .then(res => {
+        return res.json()
+          .then(body => {
+            return {
+              status: res.status,
+              ok: res.ok,
+              headers: res.headers,
+              body: body
+            };
+          })
+      }).then(
+        result => {
+          if (result.ok) {
+            toast.success(result.body.message, {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            this.componentDidMount();
+            this.props.navigate("/reservas")
+            window.location.reload();
+          } else {
+            toast.error(result.body.message, {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        }
+      ).catch(
+        (error) => { console.log(error) }
+      );
 
-}
+  }
 
 
   convertirFecha = (date) => {
@@ -260,8 +262,8 @@ export function Reservas() {
   const navigate = useNavigate();
   const p = useParams();
   return (
-      <>
-          <InternalReservas navigate={navigate} params={p} />
-      </>
+    <>
+      <InternalReservas navigate={navigate} params={p} />
+    </>
   );
 }

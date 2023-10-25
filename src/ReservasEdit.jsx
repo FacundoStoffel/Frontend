@@ -231,6 +231,7 @@ export class InternalReservasEdit extends Component {
             body: JSON.stringify(reserva),
             headers: {
                 'Content-Type': 'application/json',
+                'authorization': sessionStorage.getItem('token')
             }
         }
         const url = this.props.params.id_reserva
