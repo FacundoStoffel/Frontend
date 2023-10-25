@@ -1,5 +1,6 @@
 .login{
     padding: 20px;
+    
 }
 
 .form{
@@ -8,4 +9,14 @@
     padding: 40px;
     border-radius: 10px;
     /* opacity: 0.5; */
+    color: black ;
+
+}
+#login{
+    color: black ;
+}
+
+#login_btn{
+    margin: 15px 0  !important;
+    color: beige;
 }

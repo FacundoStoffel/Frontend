@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import './../styles/horaEdit.css';
 
 
 
@@ -130,7 +130,7 @@ export class InternalHorarioEdit extends Component {
         return (
             <>
                 <h1>{this.props.params.hora ? `Edicion del Horario de las ${this.props.params.hora}` : "Nuevo Horario"}</h1>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} className='horaForm'>
                     <div className="form-floating mb-3">
                         <input type="text"
                             className="form-control"
@@ -141,7 +141,7 @@ export class InternalHorarioEdit extends Component {
                             required />
                         <label for="hora">Ingrese el horario (en formato 00:00)</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <button type="submit" class="btn btn-primary" id='confirmar'>Confirmar</button>
 
                 </form>
             </>

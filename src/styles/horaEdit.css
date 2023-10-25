@@ -1,0 +1,11 @@
+.horaForm{
+    background-color: rgba(53, 53, 53, 0.5);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    /* opacity: 0.5; */
+}
+
+#confirmar{
+    margin: 5px 0 !important;
+}

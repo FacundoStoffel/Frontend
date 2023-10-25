@@ -1,27 +1,32 @@
-.tabla{
+.tabla {
     background-color: rgba(53, 53, 53, 0.5);
-        margin: 50px;
-        padding: 40px;
-        border-radius: 10px;
+    margin: 50px;
+    padding: 40px;
+    border-radius: 10px;
 }
-.table{
+
+.table {
     border-radius: 10px !important;
 }
 
-#tabla{
+#tabla {
     border-radius: 10px !important;
     font-family: Lora !important;
 }
 
-button{
-    margin: 5px;
+
+
+.btn {
+    font-family: Lora !important;
+    margin: 5px !important;
+}
+
+.modal {
     font-family: Lora !important;
 }
 
-.btn{
-    font-family: Lora !important;
-}
 
-.modal{
-    font-family: Lora !important;
+.rounded-table th:hover,
+.rounded-table td:hover {
+    background-color: #f0f0f0;
 }

@@ -1,0 +1,10 @@
+#table_hora{
+    margin: 50px 300px;
+    font-family: Lora !important;
+}
+
+#hora_nueva{
+    text-align: center !important;
+    margin: 0px 20px 20px 150px;
+    padding: auto !important;
+}

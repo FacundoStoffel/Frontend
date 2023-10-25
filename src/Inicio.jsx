@@ -15,7 +15,7 @@ export default function Inicio() {
             
             <p className="text">Nuestro equipo de barberos profesionales está aquí para brindarte un servicio excepcional.</p>
             <p className="text">Programa tu cita en línea y elige la hora que mejor te convenga.</p>
-            <p className="text sec">Si tienes cuenta inicia sesión <Link to="/login" className="link">aquí</Link> o <Link to="/register" className="link">registrate</Link></p>
+            <p className="text sec">Si tienes una cuenta inicia sesión <Link to="/login" className="link">aquí</Link> o <Link to="/register" className="link">registrate</Link></p>
             </div>
         </>
     );

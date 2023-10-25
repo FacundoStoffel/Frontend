@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import './../styles/hora.css';
 
 export class Horario extends Component {
 
@@ -146,8 +147,9 @@ export class Horario extends Component {
         return (
             <>
                 <h1>Horarios</h1>
-                <div className='ml-auto d-flex '>
-                    <Link to={"/horario/edit"} className='btn btn-primary'>Nuevo Horario</Link>
+                <div className="tabla rounded-table"  id="table_hora">
+                <div className='ml-auto d-flex ' id="hora_nueva">
+                    <Link to={"/horario/edit"} className='btn btn-primary' >Nuevo Horario</Link>
                 </div>
 
                 <table className='table table-striped'>
@@ -155,6 +157,7 @@ export class Horario extends Component {
                         <tr>
 
                             <th>Hora</th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -162,6 +165,7 @@ export class Horario extends Component {
                         {horarios_list}
                     </tbody>
                 </table>
+                </div>
                 {/* <Link to={"/horario/edit"} className='btn btn-primary'>Nuevo Horario</Link> */}
 
                 <Modal show={this.state.modal} onHide={this.closeModal}>

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/index.css';
 import jwt_decode from "jwt-decode";
+import './styles/menu.css';
 
 function Menu() {
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/Login.css';
 
 export class InternalLogin extends Component {
 
@@ -98,7 +99,7 @@ export class InternalLogin extends Component {
             <>
                 <h1>Iniciar Sesión</h1>
                 <form onSubmit={this.handleSubmit} className="form">
-                    <div className="login">
+                    <div className="login" id='login'>
                         <div className="form-floating mb-3">
                             <input type="email"
                                 className="form-control"
@@ -108,7 +109,7 @@ export class InternalLogin extends Component {
                                 name="mail" />
                             <label htmlFor="correo">Correo Electrónico</label>
                         </div>
-                        <div className="form-floating">
+                        <div className="form-floating" >
                             <input type="password"
                                 className="form-control"
                                 id="contrasena"
@@ -117,7 +118,7 @@ export class InternalLogin extends Component {
                                 name="contrasena" />
                             <label htmlFor="contrasena">Contraseña</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary" id='login_btn' >Iniciar Sesión</button>
                     </div>
                 </form >
 

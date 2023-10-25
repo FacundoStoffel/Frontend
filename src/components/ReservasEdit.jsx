@@ -372,7 +372,7 @@ export class InternalReservasEdit extends Component {
         return (
             <>
                 <h1>{this.props.params.id_reserva ? `Edicion de la Reserva ${this.props.params.id_reserva}` : "Nueva Reserva"}</h1>
-                <form onSubmit={this.handleSubmit} className="form">
+                <form onSubmit={this.handleSubmit} className="form" id='editReserv'>
                     <div className="col-sm-4 col-md-3">
                         <label htmlFor="fecha">Fecha: {espacio}</label>
                         <DatePicker

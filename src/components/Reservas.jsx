@@ -220,8 +220,8 @@ export class InternalReservas extends Component {
     return (
       <>
         <h1>Reservas</h1>
-        <div className="tabla">
-          <table className='table table-striped' id="tabla">
+        <div className="tabla rounded-table">
+          <table className='table table-striped ' id="tabla">
             <thead>
               <tr>
                 <th>Fecha</th>

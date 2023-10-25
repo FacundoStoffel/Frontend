@@ -6,8 +6,8 @@
         /* opacity: 0.5; */
 }
 
-button{
-    margin: 20px 0 10px 0;
+#registro_btn{
+    margin: 20px 0 10px 0 !important;
     font-family: Lora !important;
     /* background-color: rgb(41, 37, 83) !important;
     border-color: rgb(41, 37, 83) !important; */
@@ -20,3 +20,8 @@ input{
 label{
     font-family: Lora !important;
 }
+
+#registro{
+    color: black ;
+}
+

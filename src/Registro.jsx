@@ -108,7 +108,7 @@ export class InternalRegistro extends Component {
         return (
             <>
                 <h1>Registrarse</h1>
-                <form onSubmit={this.handleSubmit} class="form">
+                <form onSubmit={this.handleSubmit} class="form" id='registro'>
                     <div className="register">
                         <div className="form-floating mb-3">
                             <input type="text"
@@ -151,7 +151,7 @@ export class InternalRegistro extends Component {
                             <label htmlFor="contrasena">Contraseña</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <button type="submit" class="btn btn-primary" id='registro_btn'>Confirmar</button>
                 </form >
 
             </>
