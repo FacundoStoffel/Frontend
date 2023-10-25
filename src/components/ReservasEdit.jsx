@@ -354,7 +354,8 @@ export class InternalReservasEdit extends Component {
         const cortes = this.state.cortes || [];
         const corte_list = cortes.map(corte => ({
             value: corte.id_corte,
-            label: corte.corte_tipo
+            // label: corte.corte_tipo
+            label: `${corte.corte_tipo} - Precio: $${corte.precio}`
 
         }));
 

@@ -227,7 +227,7 @@ export class InternalReservas extends Component {
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Usuario</th>
-                <th>Corte</th>
+                <th>Servicio</th>
                 <th>Pago</th>
                 <th></th>
                 {/* <th>Cancelada</th> */}

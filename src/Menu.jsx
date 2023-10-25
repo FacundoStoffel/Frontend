@@ -48,12 +48,22 @@ function Menu() {
                     ? <Link to="/horario" className="nav-link active letra">Horarios</Link>
                     : null
                   }
-
+                </li>
+                <li className="nav-item">
+                  {decoded.rol === "Admin"
+                    ? <Link to="/user" className="nav-link active letra">Usuarios</Link>
+                    : null
+                  }
                 </li>
               </ul>
             </div>
-            <div className="mail"> {decoded.mail}</div>
-           
+            {/* <div className="mail">
+            <Link to = "/user/edit/" className="nav-link active letra"> {decoded.mail}</Link>
+              </div> */}
+            <div className="mail">
+              {decoded.mail}
+            </div>
+
 
             <button type="button" className='btn btn-danger' onClick={() => logout()}>
               <span className="material-symbols-outlined">

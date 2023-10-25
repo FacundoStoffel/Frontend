@@ -14,10 +14,6 @@ Para iniciar el proyecto deberas abrir la terminal en la carpeta centrar e inser
 que se instalen todas las dependencias, luego de que se haya logrado con exito ingresar en la consola npm star para
 que se inicie el proyecto
 
-### Por hacer
-
-Me falta agregar el apartado de perfil para que el usuario pueda modificar su usuario y otro listado de usuarios
-para que el admin pueda ver los mismos.
-Tambien me falta agregar en las reservasEdit para que la reserva se registre con el usuario en sesion
 
 
+- Nodejs v18.16.0

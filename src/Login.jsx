@@ -47,7 +47,7 @@ export class InternalLogin extends Component {
                     if (result.ok) {
                         sessionStorage.setItem('token', result.body.token)
 
-                        toast.success('Bienvenido', {
+                        toast.success('Bienvenido 💈', {
                             position: "top-center",
                             autoClose: 5000,
                             hideProgressBar: false,

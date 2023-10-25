@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Registro from "./Registro";
 import Horario from "./components/Horario";
 import HorarioEdit from "./components/HorarioEdit";
+import Users from "./components/Users";
+import UserEdit from "./components/UserEdit";
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path="/horario" element={<Horario/>}></Route>
           <Route path="/horario/edit" element={<HorarioEdit/>}></Route>
           <Route path="/horario/edit/:hora" element={<HorarioEdit/>}></Route>
+          <Route path="/user" element={<Users></Users>}></Route>
+          <Route path="/user/edit/:id_usuario" element={<UserEdit/>}></Route>
         </Routes>
       </div>
       <ToastContainer></ToastContainer>
